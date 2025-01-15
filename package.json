@@ -2,7 +2,6 @@
   "name": "my-react-app",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@clerk/clerk-react": "^4.x.x",
     "@emotion/react": "^11.x.x",
