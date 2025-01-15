@@ -1,0 +1,137 @@
+.group-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--bg-primary);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.group-header {
+  margin-bottom: 1.5rem;
+}
+
+.group-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.group-stats {
+  display: flex;
+  gap: 0.5rem;
+  color: #a9b1d6;
+  font-size: 0.9rem;
+}
+
+.expenses-section {
+  margin-top: 1rem;
+}
+
+.expenses-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.expenses-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.expense-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.expense-card:hover {
+  background: var(--bg-tertiary);
+  transform: translateY(-1px);
+}
+
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #5833ef, #3b1dd1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.expense-details {
+  flex: 1;
+}
+
+.expense-details h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.expense-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #a9b1d6;
+}
+
+.expense-date {
+  padding: 0.15rem 0.5rem;
+  background: rgba(169, 177, 214, 0.1);
+  border-radius: 4px;
+}
+
+.member-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.member-tag {
+  color: #5833ef;
+}
+
+.expense-amount {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.no-expenses {
+  text-align: center;
+  padding: 2rem;
+  color: #a9b1d6;
+}
+
+.add-expense-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(145deg, #5833ef, #3b1dd1);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.add-expense-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(88, 51, 239, 0.2);
+} 

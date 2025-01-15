@@ -1,0 +1,227 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-dark {
+  background: var(--bg-secondary);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #5833ef 0%, #7aa2f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0 2rem;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 6px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.language-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Clerk UserButton customization */
+.user-button-box {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #7c97e1(54, 55, 105, 0.952);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.user-button-box:hover {
+  background:#7c97e1(178, 172, 205, 0.591);
+}
+
+.user-button-trigger {
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-button-avatar-box {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #5833ef, #3b1dd1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-button-avatar-image {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Username text */
+.cl-userButtonTrigger .cl-userButtonTrigger__text {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  opacity: 0.9;
+}
+
+/* Dropdown/Popover styling */
+.user-button-popover {
+  background: #7c97e1 !important;
+  border: 1px solid rgba(88, 51, 239, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  padding: 0.5rem !important;
+  min-width: 260px !important;
+}
+
+/* Dropdown menu items */
+.cl-userButtonPopoverCard .cl-userButtonPopoverActions {
+  padding: 0.5rem !important;
+}
+
+.cl-userButtonPopoverCard .cl-userButtonPopoverAction {
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+  font-size: 1rem !important;
+  color: #fff !important;
+  opacity: 0.9;
+}
+
+.cl-userButtonPopoverCard .cl-userButtonPopoverAction:hover {
+  background: rgba(88, 51, 239, 0.15) !important;
+  opacity: 1;
+}
+
+/* User info in dropdown */
+.cl-userButtonPopoverCard .cl-userPreview {
+  padding: 1rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.cl-userButtonPopoverCard .cl-userPreviewMainIdentifier {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+}
+
+.cl-userButtonPopoverCard .cl-userPreviewSecondaryIdentifier {
+  font-size: 0.95rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.nav-logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(145deg, #5833ef, #3b1dd1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  letter-spacing: -0.5px;
+  padding: 0.5rem 1rem;
+}
+
+.nav-logo:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+} 

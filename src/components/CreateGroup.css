@@ -1,0 +1,179 @@
+.create-group-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #1a1b26;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(88, 51, 239, 0.1);
+  border: 1px solid rgba(88, 51, 239, 0.2);
+  color: #fff;
+}
+
+h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: #a9b1d6;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.group-name-input,
+.member-input,
+.group-description {
+  width: 100%;
+  padding: 1rem;
+  background: #24283b;
+  border: 1px solid rgba(88, 51, 239, 0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #fff;
+  transition: all 0.2s ease;
+  height: 48px;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.group-description {
+  height: 120px;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.input-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.member-input {
+  margin-bottom: 0;
+}
+
+.add-member-btn {
+  padding: 0 1.5rem;
+  background: linear-gradient(145deg, #5833ef, #3b1dd1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(88, 51, 239, 0.2);
+}
+
+.add-member-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(88, 51, 239, 0.3);
+}
+
+.add-member-btn:disabled {
+  background: #24283b;
+  color: #565f89;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.members-list {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #24283b;
+  border-radius: 8px;
+  border: 1px solid rgba(88, 51, 239, 0.2);
+}
+
+.member-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  background: rgba(88, 51, 239, 0.2);
+  border-radius: 20px;
+  color: #7aa2f7;
+  font-size: 0.9rem;
+}
+
+.remove-member {
+  background: none;
+  border: none;
+  color: #f7768e;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0 0 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.remove-member:hover {
+  transform: scale(1.2);
+}
+
+.create-group-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(145deg, #5833ef, #3b1dd1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(88, 51, 239, 0.2);
+  margin-top: 1rem;
+}
+
+.create-group-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(88, 51, 239, 0.3);
+}
+
+.create-group-btn:disabled {
+  background: #24283b;
+  color: #565f89;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  background: rgba(247, 118, 142, 0.1);
+  border: 1px solid #f7768e;
+  color: #f7768e;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.invite-status {
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.invite-status.sent {
+  color: #9ece6a;
+}
+
+.invite-status.failed {
+  color: #f7768e;
+}
+
+.group-name-input:focus,
+.member-input:focus,
+.group-description:focus {
+  outline: none;
+  border-color: #5833ef;
+  box-shadow: 0 0 0 2px rgba(88, 51, 239, 0.2);
+}
+
+.group-name-input:hover,
+.member-input:hover,
+.group-description:hover {
+  border-color: #5833ef;
+} 
