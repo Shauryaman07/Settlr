@@ -14,18 +14,24 @@ import SignUp from './components/SignUp';
 
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
+if (!clerkPubKey) {
+  throw new Error("Missing Clerk Publishable Key");
+}
+
 function App() {
   return (
     <div className="app-container">
-      <ClerkProvider publishableKey={clerkPubKey}>
+      <ClerkProvider 
+        publishableKey={clerkPubKey}
+      >
         <Router>
           <Navigation />
           <div className="main-content">
             <Routes>
               {/* Public routes */}
               <Route path="/" element={<LandingPage />} />
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/sign-in/*" element={<SignIn />} />
+              <Route path="/sign-up/*" element={<SignUp />} />
               
               {/* Protected routes */}
               <Route
