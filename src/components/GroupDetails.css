@@ -134,4 +134,10 @@
 .add-expense-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(88, 51, 239, 0.2);
+}
+
+.payer-info {
+  font-size: 0.85rem;
+  color: #a9b1d6;
+  margin-top: 0.25rem;
 } 

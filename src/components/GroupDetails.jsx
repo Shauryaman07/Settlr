@@ -1,7 +1,7 @@
-import { useOrganization, useUser } from '@clerk/clerk-react';
+import { useOrganization, useOrganizationList, useUser } from '@clerk/clerk-react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import './ExpenseList.css';
+import './GroupDetails.css';
 
 // Profile Icon Component
 const ProfileIcon = ({ firstName, lastName }) => {
@@ -16,142 +16,95 @@ const ProfileIcon = ({ firstName, lastName }) => {
 const GroupDetails = () => {
   const { orgId } = useParams();
   const navigate = useNavigate();
-  console.log('Current orgId:', orgId);
-
-  const { 
-    organization, 
-    isLoaded: isOrgLoaded,
-    memberships,
-    invitations
-  } = useOrganization({ 
-    organizationId: orgId,
-    memberships: { infinite: true },
-    invitations: { infinite: true }
-  });
-
-  const { user, isLoaded: isUserLoaded } = useUser();
-  const [expenses, setExpenses] = useState([]);
+  const { user } = useUser();
+  const { setActive } = useOrganizationList();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expenses, setExpenses] = useState([]);
+
+  const { organization, isLoaded: isOrgLoaded, memberships, invitations } = useOrganization({
+    organizationId: orgId,
+    memberships: {
+      infinite: true,
+      includePublicUserData: true
+    },
+    invitations: {
+      infinite: true
+    }
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!organization || !user) {
-        console.log('Missing required data:', {
-          organization: !!organization,
-          user: !!user
-        });
-        return;
-      }
-      
+    const initializeGroup = async () => {
       try {
-        setLoading(true);
-        // Extract just the ID part after the last slash if present
+        if (!orgId) return;
+        
+        // Set the active organization
+        await setActive({ organization: orgId });
+        
+        // Fetch expenses for the group
         const idPart = orgId.includes('/') ? orgId.split('/').pop() : orgId;
-        console.log('ID part:', idPart);
-        
-        // Clean the organization ID - remove 'org_' prefix and any special characters
         const cleanOrgId = idPart.replace(/^org_/, '').replace(/[^a-zA-Z0-9]/g, '');
-        console.log('Cleaned organization ID:', cleanOrgId);
         
-        const apiUrl = `http://localhost:3005/api/groups/${cleanOrgId}/member-details`;
-        console.log('Fetching from:', apiUrl);
-        
-        const response = await fetch(apiUrl);
-        console.log('API Response:', {
-          status: response.status,
-          statusText: response.statusText,
-          ok: response.ok
-        });
+        const response = await fetch(`http://localhost:3005/api/groups/${cleanOrgId}/member-details`);
         
         if (!response.ok) {
-          const errorText = await response.text();
-          console.error('API Error Response:', errorText);
-          throw new Error(`Failed to fetch member details: ${response.status} ${response.statusText}`);
+          throw new Error('Failed to fetch group expenses');
         }
         
         const data = await response.json();
-        console.log('Received member data:', data);
-        
-        if (!Array.isArray(data)) {
-          console.error('Unexpected data format:', data);
-          throw new Error('Received invalid data format from server');
-        }
-        
-        setExpenses(data);
+        setExpenses(Array.isArray(data) ? data : []);
       } catch (err) {
-        console.error('Error fetching member details:', err);
+        console.error('Error initializing group:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    if (isOrgLoaded && isUserLoaded && orgId) {
-      fetchData();
+    if (orgId) {
+      initializeGroup();
     }
-  }, [organization, user, isOrgLoaded, isUserLoaded, orgId]);
+  }, [orgId, setActive]);
 
-  const handleDeleteGroup = async () => {
-    if (!window.confirm('Are you sure you want to delete this group? This action cannot be undone.')) {
-      return;
-    }
-
-    try {
-      const response = await fetch(`http://localhost:3005/api/groups/${orgId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'user-id': user.id
-        }
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to delete group');
-      }
-
-      navigate('/expenses');
-    } catch (err) {
-      console.error('Error deleting group:', err);
-      setError(err.message);
-    }
-  };
-
-  if (loading) {
-    return <div className="expense-list-container">Loading group details...</div>;
+  if (!isOrgLoaded || loading) {
+    return <div className="group-details-container">Loading group details...</div>;
   }
 
   if (error) {
     return (
-      <div className="expense-list-container">
+      <div className="group-details-container">
         <h1>Error</h1>
         <p className="subtitle">{error}</p>
       </div>
     );
   }
 
-  // Check if current user is an admin
-  const isAdmin = organization?.membership?.role === 'admin';
+  if (!organization) {
+    return (
+      <div className="group-details-container">
+        <h1>Group not found</h1>
+        <p className="subtitle">The group you're looking for doesn't exist or you don't have access to it.</p>
+        <button 
+          className="action-btn"
+          onClick={() => navigate('/expenses')}
+        >
+          Back to Groups
+        </button>
+      </div>
+    );
+  }
+
+  const activeMembers = memberships?.data?.filter(member => member.status === 'active') || [];
+  const pendingInvites = invitations?.data || [];
 
   return (
-    <div className="expense-list-container">
-      <h1>{organization?.name}</h1>
+    <div className="group-details-container">
+      <h1>{organization?.name || 'Loading...'}</h1>
       
       {/* Group Stats */}
       <div className="group-info">
-        <p className="subtitle">Active Members: {memberships?.data?.length || 0}</p>
-        <p className="subtitle">Pending Invites: {invitations?.data?.length || 0}</p>
-        
-        {/* Admin-only delete button */}
-        {isAdmin && (
-          <button 
-            className="delete-group-btn"
-            onClick={handleDeleteGroup}
-          >
-            Delete Group
-          </button>
-        )}
+        <p className="subtitle">Active Members: {organization?.membersCount || activeMembers.length}</p>
+        <p className="subtitle">Pending Invites: {pendingInvites.length}</p>
       </div>
 
       {/* Member Expenses Section */}
@@ -176,11 +129,11 @@ const GroupDetails = () => {
         ) : (
           <div className="expenses-grid">
             {expenses.map((expense) => {
-              const payer = memberships?.data?.find(m => m.publicUserData.userId === expense.paid_by_user_id);
+              const payer = activeMembers.find(m => m.publicUserData.userId === expense.paid_by_user_id);
               const firstName = payer?.publicUserData?.firstName || '';
               const lastName = payer?.publicUserData?.lastName || '';
               const payerName = payer ? 
-                `${firstName} ${lastName}` : 
+                `${firstName} ${lastName}`.trim() || payer.publicUserData.identifier : 
                 'Unknown';
 
               return (
@@ -208,4 +161,4 @@ const GroupDetails = () => {
   );
 };
 
-export default GroupDetails; 
+export default GroupDetails;
