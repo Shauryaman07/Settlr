@@ -1,7 +1,6 @@
 import { SignUp } from '@clerk/clerk-react';
 import React from 'react';
 import './SignUp.css';
-
 const SignUpPage = () => {
   return (
     <div className="sign-up-container">
